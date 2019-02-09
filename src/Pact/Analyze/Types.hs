@@ -7,13 +7,14 @@
 {-# LANGUAGE TemplateHaskell       #-}
 
 module Pact.Analyze.Types
-  ( module Pact.Analyze.Types.Languages
+  ( module Text.PrettyPrint.ANSI.Leijen
+
+  , module Pact.Analyze.Types.Languages
   , module Pact.Analyze.Types.Model
   , module Pact.Analyze.Types.Numerical
   , module Pact.Analyze.Types.ObjUtil
   , module Pact.Analyze.Types.Shared
   , module Pact.Analyze.Types.Types
-  , module Pact.Analyze.Types.UserShow
 
   , Check(..)
   , HasVarId(varId)
@@ -35,6 +36,8 @@ import           Control.Lens                 (Lens', makeLenses, use, (+=))
 import           Control.Monad.State.Strict   (MonadState)
 import           Data.Text                    (Text)
 import           Prelude                      hiding (Float)
+import Text.PrettyPrint.ANSI.Leijen hiding
+  ((<$>), empty, int, bool, columns, list, float)
 
 import qualified Pact.Types.Typecheck         as TC
 
@@ -44,7 +47,6 @@ import           Pact.Analyze.Types.Numerical
 import           Pact.Analyze.Types.ObjUtil
 import           Pact.Analyze.Types.Shared
 import           Pact.Analyze.Types.Types
-import           Pact.Analyze.Types.UserShow
 
 data Quantifier
   = Forall' VarId Text QType

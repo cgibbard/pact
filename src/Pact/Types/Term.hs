@@ -65,7 +65,7 @@ module Pact.Types.Term
    pattern TLitString,pattern TLitInteger,pattern TLitBool,
    tLit,tStr,termEq,abbrev,
    Gas(..),
-   parensSep,commaBraces,commaBrackets,spaceBrackets
+   parensSep,parenList,commaBraces,commaBrackets,spaceBrackets,text'
    ) where
 
 
@@ -153,11 +153,15 @@ data KeySet = KeySet {
     , _ksPredFun :: !Name
     } deriving (Eq,Generic,Show)
 
-commaBraces, commaBrackets, spaceBrackets, parensSep :: [Doc] -> Doc
+commaBraces, commaBrackets, spaceBrackets, parensSep, parenList :: [Doc] -> Doc
 commaBraces   = encloseSep "{" "}" ","
 commaBrackets = encloseSep "[" "]" ","
 spaceBrackets = encloseSep "[" "]" " "
 parensSep     = parens . sep
+parenList     = parensSep
+
+text' :: Text -> Doc
+text' = text . T.unpack
 
 instance Pretty KeySet where
   pretty (KeySet ks f) = "KeySet" <+> commaBraces
